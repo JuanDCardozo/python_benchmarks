@@ -2,7 +2,6 @@ FROM debian:jessie
 
 
 COPY  python_benchmarks.py  /
-COPY  Anaconda3-5.1.0-Linux-x86_64.sh /
 
 RUN apt-get update && \
     apt-get install -qyy \

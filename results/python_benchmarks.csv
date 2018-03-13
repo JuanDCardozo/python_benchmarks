@@ -142,3 +142,9 @@ numpy_exp_test,100,0.0028641710014198907,Intel
 numpy_dot_test,10,0.0018566709986771457,Intel
 numpy_dot_test,100,0.015180441998381866,Intel
 numpy_dot_test,1000,6.7850684840013855,Intel
+function,size,time,type
+autosklearn_reg_test,10,54.34784726399994,Regular
+autosklearn_clf_test,10,54.35197710000284,Regular
+function,size,time,type
+autosklearn_reg_test,10,54.360278424999706,Intel
+autosklearn_clf_test,10,54.41757148399847,Intel

@@ -6,7 +6,7 @@ COPY  python_benchmarks.py  /
 RUN apt-get update && \
     apt-get install -qyy \
     -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
-    python3 python-pip ca-certificates libpq-dev python-psycopg2 wget swig bzip2 curl netcat && \
+    python3 python-pip ca-certificates build-essential libpq-dev python-psycopg2 wget swig bzip2 curl netcat && \
     cd /usr/local/bin && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -20,14 +20,16 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN conda update conda && \
     conda config --add channels intel &&\
-    conda create -n idp intelpython3_full python=3
+    conda create -n idp intelpython3_full python=3 &&\
+    conda install gxx_linux-64 gcc_linux-64 swig
+
+RUN curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install &&\
+    pip install auto-sklearn
 
 #ENV PATH /opt/conda/envs/idp/bin:$PATH
 
-#RUN source activate idp; \
-#    curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install &&\
-#    pip install auto-sklearn
 
 CMD python3 python_benchmarks.py;\
     export PATH=/opt/conda/envs/idp/bin:$PATH;\
+    pip install auto-sklearn;\
     python3 python_benchmarks.py

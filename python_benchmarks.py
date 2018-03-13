@@ -18,8 +18,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
-#import autosklearn.classification
-#import autosklearn.regression
+import autosklearn.classification
+import autosklearn.regression
 import sklearn.model_selection
 import sklearn.datasets
 import sklearn.metrics
@@ -232,7 +232,7 @@ def scikit_ridger_test(size):
 # ***************************************************************************
 # autosklearn Test
 # ***************************************************************************
-"""
+
 def autosklearn_clf_test(size):
     X, y = datasets.make_classification(n_samples=1000, n_features=size, n_informative=2, n_redundant=2)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
@@ -247,16 +247,16 @@ def autosklearn_reg_test(size):
     automl = autosklearn.regression.AutoSklearnRegressor(ensemble_size=1, \
     time_left_for_this_task=60,per_run_time_limit =30,\
     initial_configurations_via_metalearning=0)
-    automl.fit(X_train, y_train)"""
+    automl.fit(X_train, y_train)
 
 if __name__ == "__main__":
     python_type = ("Intel" if 'Intel' in sys.version else "Regular")
     print(python_type)
     print("Starting Benchmarks...")
-    testNumpy = True
+    testNumpy = False
     testScipy =  False
     testScikit = False
-    testAuto = False
+    testAuto = True
 
     results = []
     # ******************************************************************
@@ -293,11 +293,10 @@ if __name__ == "__main__":
     # ******************************************************************
     # AutoSklearn Benchmarking
     # ******************************************************************
-    """    if testAuto:
+    if testAuto:
             auto_tests = [autosklearn_reg_test, autosklearn_clf_test]
             print("********************Autosklearn Benchmarks************************")
-            results += benchmark_runner(auto_tests, python_type, power=7)
-    """
+            results += benchmark_runner(auto_tests, python_type, power=1 , numberexec =1)
     result_pd = pd.DataFrame(results)
     result_pd.to_csv("/results/python_benchmarks.csv", sep=',', mode="a+", index=False)
     print("End of  Benchmarks")

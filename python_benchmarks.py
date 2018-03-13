@@ -254,8 +254,8 @@ if __name__ == "__main__":
     print(python_type)
     print("Starting Benchmarks...")
     testNumpy = True
-    testScipy =  True
-    testScikit = True
+    testScipy =  False
+    testScikit = False
     testAuto = False
 
     results = []
@@ -299,5 +299,5 @@ if __name__ == "__main__":
             results += benchmark_runner(auto_tests, python_type, power=7)
     """
     result_pd = pd.DataFrame(results)
-    result_pd.to_csv("python_benchmarks.csv", sep='\t', mode="a+", index=False)
+    result_pd.to_csv("/results/python_benchmarks.csv", sep=',', mode="a+", index=False)
     print("End of  Benchmarks")

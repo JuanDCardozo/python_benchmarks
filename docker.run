@@ -22,11 +22,12 @@ RUN conda update conda && \
     conda config --add channels intel &&\
     conda create -n idp intelpython3_full python=3
 
-ENV PATH /opt/conda/envs/idp/bin:$PATH
+#ENV PATH /opt/conda/envs/idp/bin:$PATH
 
 #RUN source activate idp; \
 #    curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install &&\
 #    pip install auto-sklearn
 
-CMD source activate idp; \
+CMD python3 python_benchmarks.py;\
+    export PATH=/opt/conda/envs/idp/bin:$PATH;\
     python3 python_benchmarks.py

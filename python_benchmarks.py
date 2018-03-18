@@ -37,7 +37,7 @@ import timeit
 def benchmark_runner(tests, python_type, power = 3, numberexec =1000):
     result = []
     for test in tests:
-        sizes = [10**(i+1) for i in range(4, power)]
+        sizes = [10**(i+1) for i in range(power)]
         for size in sizes:
             row = dict()
             row['type'] = python_type

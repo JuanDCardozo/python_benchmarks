@@ -34,7 +34,7 @@ import timeit
 #  Benchmark Runner
 # ***************************************************************************
 
-def benchmark_runner(tests, python_type, power = 3, numberexec =1000, testNum):
+def benchmark_runner(tests, python_type, testNum, power = 3, numberexec =1000):
     result = []
     for test in tests:
         sizes = [10**(i+1) for i in range(power)]
@@ -273,14 +273,14 @@ if __name__ == "__main__":
             numpy_mul_scalar_test,numpy_div_scalar_test,  numpy_test_log, numpy_exp_test, numpy_dot_test]
 
             print("********************Numpy Benchmarks************************")
-            results += benchmark_runner(numpy_tests, python_type, power=7,i)
+            results += benchmark_runner(numpy_tests, python_type,i, power=7)
         # ******************************************************************
         # Scipy Benchmarking
         # ******************************************************************
         if testScipy:
             scipy_tests =  [scipy_erf_test]
             print("********************Scipy Benchmarks************************")
-            results += benchmark_runner(scipy_tests, python_type,power=7,i)
+            results += benchmark_runner(scipy_tests, python_type,i,power=7)
 
         # ******************************************************************
         # Scikit Learn Benchmarking
@@ -291,14 +291,14 @@ if __name__ == "__main__":
              scikit_ridgec_test,scikit_dtr_test, scikit_knnr_test, scikit_lsvr_test,\
               scikit_lasso_test, scikit_rfr_test, scikit_ridger_test]
             print("********************Scikit Benchmarks************************")
-            results += benchmark_runner(scikit_tests, python_type, power=7, numberexec =10,i)
+            results += benchmark_runner(scikit_tests, python_type, i,power=7, numberexec =10)
         # ******************************************************************
         # AutoSklearn Benchmarking
         # ******************************************************************
         if testAuto:
                 auto_tests = [autosklearn_reg_test, autosklearn_clf_test]
                 print("********************Autosklearn Benchmarks************************")
-                results += benchmark_runner(auto_tests, python_type, power=7, numberexec = 10, i)
+                results += benchmark_runner(auto_tests, python_type, i, power=7, numberexec = 10)
         result_pd = pd.DataFrame(results)
         result_pd.to_csv("/results/python_benchmarks.csv", sep=',', mode="a+", index=False)
     print("End of  Benchmarks")
